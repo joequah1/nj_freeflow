@@ -1,12 +1,18 @@
-console.log(1);
+/*
+this.animationContainer is required to render animation content
+used VelocityJs animation library
+
+attributes 
+- njanimation-in
+- njanimation-in-duration
+- njanimation-in-delay
+*/
 myComponent.prototype.animateProperty = function () {
     
     var _this = this;
     
     var media = this.sdk.getSelect({
-        'title' : {
-            'title' : 'Animation'
-        },
+        'title' : { 'title' : 'Animation' },
         'input' : {
             'value' : -1,
             'options' : [
@@ -24,8 +30,7 @@ myComponent.prototype.animateProperty = function () {
             'callback' : function () {
                 
                 var value = $(this).val();
-                //$('.ff_layer.selected[tab=' + $(this).attr('tab') + ']').addClass('animated ' + $(this).val());
-                
+
                 if (value != -1) {
                     $('.ff_layer.selected[tab=' + $(this).attr('tab') + ']').addClass('njanimation');
                     $('.ff_layer.selected[tab=' + $(this).attr('tab') + ']').attr('njanimation-in', value);
@@ -38,9 +43,7 @@ myComponent.prototype.animateProperty = function () {
     });
     
     var delay = this.sdk.getInput({
-        'title' : {
-            'title' : 'Delay'
-        },
+        'title' : { 'title' : 'Delay' },
         'id' : '',
         input : {
             'type' : 'number',
@@ -55,30 +58,22 @@ myComponent.prototype.animateProperty = function () {
             'callback' : function () {
                 var value = $(this).val();
                 
-                //$('.ff_layer.selected[tab=' + $(this).attr('tab') + ']').css('animation-delay', value + 's');
-                //$('.ff_layer.selected[tab=' + $(this).attr('tab') + ']').css('-webkit-animation-delay', value + 's');
                 $('.ff_layer.selected[tab=' + $(this).attr('tab') + ']').attr('njanimation-in-delay', value * 1000);
             }
         }
     });
     
+    /* play aniamtion button */
     var play = this.sdk.getButton({
-        'title' : {
-            'title' : ''
-        },
+        'title' : {'title' : '' },
         'input' : { value : 'play', tab : this.tab },
         'event' : {
             'type' : 'click',
             'callback' : function () {
                 console.log(1)
                 var tab = $(this).attr('tab');
-                /*
-                _this.content.hide();
-                
-                setTimeout(function () {
-                    _this.content.show();    
-                }, 1);
-                */
+
+                /* run all animations - ad serving code */
                 var eles = document.getElementsByClassName('njanimation');
                 for ( var i = 0; i < eles.length; i++ ) {
                     var transition = eles[i].getAttribute('njanimation-in');
@@ -92,6 +87,7 @@ myComponent.prototype.animateProperty = function () {
         }
     });
     
+    /* section to contain animations inputs */
     var section = this.sdk.section ({
         'input' : [media, delay, play],
     });

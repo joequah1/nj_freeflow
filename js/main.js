@@ -32,12 +32,11 @@ var myComponent = function (options) {
     this.sdk.loadJs('http://192.168.56.1:9090/js/media_text.js');
     this.sdk.loadJs('http://192.168.56.1:9090/js/media_shape.js');
     this.sdk.loadJs('http://192.168.56.1:9090/js/velocity.js', function () {
+        /* to use Velocity without Jquery */ 
         if (window.jQuery) { window.Velocity = $.Velocity; };
     });
     
     this.sdk.loadCss('http://192.168.56.1:9090/css/style.css');
-    //this.sdk.loadCss('http://192.168.56.1:9090/css/animate.css');
-    //this.sdk.loadCss('http://192.168.56.1:9090/css/animation-property.css');
     this.sdk.loadCss('http://192.168.56.1:9090/css/nj-pure-tab.css');
     
     this.layering();
