@@ -1,0 +1,54 @@
+/* CSS Document */
+.nj_tabs {
+    width: 100%;
+    float: none;
+    list-style: none;
+    padding: 0;
+    margin: 0px auto;
+    position: relative;
+	display: block;
+    min-height: 124px;
+}
+.nj_tabs label {
+    display: inline-block;
+    float: left;
+    padding: 5px 10px;
+    background: white;
+    cursor: pointer;
+    margin-bottom: -1px;
+    position: relative;
+    z-index: 1000;
+    border-bottom: 1px solid #ccc;
+}
+.nj_tabs label:hover {
+    color: #3498db;
+}
+.nj_tabs .tab_content {
+    display: none;
+    width: 100%;
+    border-top: 1px solid #ccc;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    position: relative;
+    top: 27px;
+    padding-bottom: 35px;
+}
+.nj_tabs input[type=radio] {
+    display:none;
+}
+.nj_tabs .tab_content.selected {
+    display: block;
+}
+.nj_tabs label.selected  {
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: none;
+    font-weight: 800;
+}
+
+.nj_tabs .tab_content .innerTinyDivision {
+    padding: 0px 5% 0 5%;
+    overflow :auto;
+    margin-top: 5px;
+}

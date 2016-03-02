@@ -1,0 +1,26 @@
+/* layer json structure */
+{
+    layers : {
+        1 : {
+            name : '',
+            status : 1,
+            x : 0,
+            y : 0,
+            w : 50,
+            h : 50,
+            content : {}
+        },
+        2 : {
+            name : '',
+            status : 1, 
+            x : 0,
+            y : 0,
+            w : 50,
+            h : 50,
+            content : {
+                media : '',
+                data : {}
+            }
+        }
+    }
+}
