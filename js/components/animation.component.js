@@ -20,7 +20,6 @@ myComponent.prototype.animateProperty = function () {
     var inSelection = this.sdk.getSelect({
         'title' : { 'title' : 'Build In' },
         'input' : {
-            'value' : _this.data.layers[layer].buildIn.transition,
             'options' : [
                 {'text' : 'None', 'value' : ''},
                 {'text' : 'Fade In', 'value' : 'fadeIn'},
@@ -57,7 +56,6 @@ myComponent.prototype.animateProperty = function () {
     var outSelection = this.sdk.getSelect({
         'title' : { 'title' : 'Build Out' },
         'input' : {
-            'value' : _this.data.layers[layer].buildOut.transition,
             'options' : [
                 {'text' : 'None', 'value' : ''},
                 {'text' : 'Fade Out', 'value' : 'fadeOut'},
@@ -97,7 +95,6 @@ myComponent.prototype.animateProperty = function () {
             'type' : 'number',
             'class' : 'ff_animation_in_delay_input',
             'tab' : this.tab,
-            'value' : _this.data.layers[layer].buildIn.delay / 1000,
             'style' : 'width:95%;',
             'step': 0.1
         },
@@ -120,7 +117,6 @@ myComponent.prototype.animateProperty = function () {
             'type' : 'number',
             'class' : 'ff_animation_out_delay_input',
             'tab' : this.tab,
-            'value' : _this.data.layers[layer].buildOut.delay / 1000,
             'style' : 'width:95%;',
             'step': 0.1
         },
@@ -143,7 +139,6 @@ myComponent.prototype.animateProperty = function () {
             'type' : 'number',
             'class' : 'ff_animation_in_duration_input',
             'tab' : this.tab,
-            'value' : _this.data.layers[layer].buildIn.duration / 1000,
             'style' : 'width:95%;',
             'step': 0.1
         },
@@ -166,7 +161,6 @@ myComponent.prototype.animateProperty = function () {
             'type' : 'number',
             'class' : 'ff_animation_out_duration_input',
             'tab' : this.tab,
-            'value' : _this.data.layers[layer].buildOut.duration / 1000,
             'style' : 'width:95%;',
             'step': 0.1
         },

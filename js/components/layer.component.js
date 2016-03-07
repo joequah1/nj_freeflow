@@ -134,6 +134,7 @@ myComponent.prototype.createLayer = function (_this, index) {
     /* set content property after insert to json */
     _this.setContentProperty(_this.tab, index);
     _this.changeAnimationProperty(_this.tab, index);
+    _this.changeActionProperty(_this.tab, index);
 
     /* show layer content */
     _this.showLayerContent();
@@ -168,6 +169,7 @@ myComponent.prototype.layeringEvents = function () {
         /* set content property */
         _this.setContentProperty(tab, index);
         _this.changeAnimationProperty(tab, index);
+        _this.changeActionProperty(_this.tab, index);
         
         /* change the media */
         _this.changeMedia(index);
@@ -196,6 +198,7 @@ myComponent.prototype.layeringEvents = function () {
         /* set content property */
         _this.setContentProperty(tab, index);
         _this.changeAnimationProperty(tab, index);
+        _this.changeActionProperty(_this.tab, index);
         
         /* change the media */
         _this.changeMedia(index);

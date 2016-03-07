@@ -12,7 +12,6 @@ myComponent.prototype.action = function () {
             'type' : 'text',
             'class' : ' ff_action_lp_input ff_actions ',
             'tab' : this.tab,
-            'value' : _this.data.layers[layer].actions.click.lp,
             'style' : 'width:95%;',
             'placeholder' : 'http://www.example.com'
         },
@@ -41,7 +40,7 @@ myComponent.prototype.action = function () {
             'title' : 'On Click'
         },
         'input' : {
-            'value' : _this.data.layers[layer].actions.click.type,
+            'value' : -1,
             'options' : [
                 {'text' : '-- Select --', 'value' : -1},
                 {'text' : 'To Landing Page', 'value' : 0}
@@ -54,17 +53,26 @@ myComponent.prototype.action = function () {
             'callback' : function () {
                 
                 var value = $(this).val();
-                var layer = $('.ff_layer.selected[tab=' + $(this).attr('tab') + ']').attr('layer');
+                var tab = $(this).attr('tab');
+                var layer = $('.ff_layer.selected[tab=' + tab + ']').attr('layer');
                 
                 if (typeof _this.data.layers[layer] != 'undefined') {
                     _this.data.layers[layer].actions.click.type = value;
                 }
                 
-                $('.ff_actions').parent().hide();
+                $('.ff_actions[tab=' + tab + ']').parent().hide();
                 $(actions[value]).show();
             }
         }
     });
     
     this.actionContainer.append([click, lp]);
+}
+
+
+myComponent.prototype.changeActionProperty = function (tab, index) {
+    /* set in input */
+    $('.ff_action_lp_input[tab=' + tab + ']').val(this.data.layers[index].actions.click.lp);
+    $('.ff_action_select[tab=' + tab + ']').val(this.data.layers[index].actions.click.type);
+    document.querySelector('.ff_action_select[tab=' + tab + ']').dispatchEvent(new Event('change'));
 }
