@@ -1,5 +1,5 @@
 var buttonMedia = function (options) { 
-    console.log(options)
+    
     this.id = options.id;
     this.content = $(options.content);
     this.container = $(options.container);
