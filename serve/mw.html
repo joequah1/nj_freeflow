@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="../css/media.css">
+
+<div id="ff_layer_0" class="ff_layer ff_layer_style ui-draggable" tab="tab1" layer="0" style="position: absolute; top: 50px; left: 50px; width: 50px; height: 50px;"><div class="content"><a id="ff_button_btn_0" tab="tab3" layer="0" class="ff_button_btn">button</a></div></div><div id="ff_layer_1" class="ff_layer ff_layer_style selected ui-resizable ui-draggable" tab="tab1" layer="1" action-click-lp="http://www.google.com" style="position: absolute; top: 102px; left: 0px; width: 50px; height: 50px;"><div class="content"><a id="ff_button_btn_1" tab="tab3" layer="1" class="ff_button_btn">button</a></div><div class="ui-resizable-handle ui-resizable-e"></div><div class="ui-resizable-handle ui-resizable-s"></div><div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style="z-index: 1001;"></div></div>
+
+<script src="../js/plugins/velocity.js"></script>
+<script>
+    var data = {"layers":{"0":{"x":"50","y":"50","w":"50","h":"50","status":1,"content":{"media":"1","data":{"1":{"text":"button","action":-1,"action_lp":""}}},"actions":{"click":{"type":-1,"lp":""}},"buildIn":{"transition":"fadeIn","delay":0,"duration":1000},"buildOut":{"transition":"fadeOut","delay":1500,"duration":1000}},"1":{"x":"0","y":"102","w":"50","h":"50","status":1,"content":{"media":"1","data":{"1":{"text":"button","action":-1,"action_lp":""}}},"actions":{"click":{"type":"0","lp":"www.google.com"}},"buildIn":{"transition":"slideLeftIn","delay":1000,"duration":1000},"buildOut":{"transition":"flipYOut","delay":2500,"duration":1000}}}};
+    
+    var tab = 'tab1';
+    
+     
+    for ( var i = 0; i < Object.keys(data.layers).length; i++ ) {
+        var ele = document.querySelector('#ff_layer_' + i + '[tab=' + tab + ']');
+        
+        /* animations */
+        var buildIn = data.layers[i].buildIn;
+        var buildOut = data.layers[i].buildOut;
+        if ( buildIn.transition != '' ) {
+            ele.style.opacity = '0';
+            Velocity( ele, "transition." +  buildIn.transition, { duration : buildIn.duration, delay : buildIn.delay });
+        }
+        if ( buildOut.transition != '' ) {
+            //Velocity( ele, "transition." +  buildOut.transition, { duration : buildOut.duration, delay : buildOut.delay });
+        }
+        
+        /* actions */
+        var click = data.layers[i].actions.click.type;
+        if ( click == 0 ) {
+            ele.addEventListener('click', function () {
+                var url = this.getAttribute('action-click-lp');
+                if (typeof mraid !== 'undefined') {
+                    mraid.open(url);
+                } else {
+                    window.open(url);
+                }
+            });
+        }
+    }
+</script>
