@@ -23,6 +23,7 @@ var myComponent = function (options) {
     this.sdk.setPrefStructure (this.data);
     
     var _this = this;
+    this.components = {};
     
     this.path = 'http://192.168.56.1:9090/';
 
@@ -51,25 +52,44 @@ var myComponent = function (options) {
         if (window.jQuery) { window.Velocity = $.Velocity; };
         
         _this.generate();
-        _this.layering();
-        _this.renderMedia();
-        _this.layerContent();
-        _this.animateProperty();
-        _this.action();
+        _this.components = { 
+            'layer' : layer,
+            'media' : media,
+            'property' : property,
+            'animation' : animation,
+            'action' : action,
+        };
+        
+        _this.register();
 
         /* add layer for new ad */
         if ( Object.keys(options.data).length == 0 ) {
             $('.ad_creator_sub_btn[tab='+_this.tab+']').click();
         } else {
             for ( var i = 0; i < Object.keys(options.data.layers).length; i++ ) {
-                _this.createLayer(_this, i);
-                _this.changeMedia(i);
+                _this.components['layer'].create(i);
             }
         }
     })
     
 
 }
+/* initializing components */
+myComponent.prototype.register = function () {
+    for ( var fn in this.components ) {   
+        this.components[fn] = new this.components[fn](this);
+        this.components[fn].initialize();
+    }
+}
+/* on selected layer change, trigger change function in each component */
+myComponent.prototype.changeLayer = function (tab, index) {
+    for ( var fn in this.components ) {  
+        if (typeof this.components[fn].change != 'undefined') {
+            this.components[fn].change(tab, index);
+        }
+    }
+}
+
 
 myComponent.prototype.loadJs = function(files, callback) {
     var _this = this;
@@ -99,6 +119,8 @@ myComponent.prototype.addHttp = function (url) {
    return url;
 }
 
+
+/* @TEST generate html */
 myComponent.prototype.generate = function () {
     
     var _this = this;
@@ -110,9 +132,6 @@ myComponent.prototype.generate = function () {
             'type' : 'click',
             'callback' : function () {
                 
-                $.get('http://192.168.56.1:9090/js/main.js', function (data) {
-                    console.log(data);
-                });
                 var tab = $(this).attr('tab');
                 console.log('generate');
                 console.log(_this.content.html() );
