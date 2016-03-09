@@ -254,8 +254,8 @@ var animation = function (_this) {
 
 
 /*
-myComponent.prototype.test = (function() {
-    var cached_function = myComponent.prototype.test;
+freeflowComponent.prototype.test = (function() {
+    var cached_function = freeflowComponent.prototype.test;
 
     return function(str) {
         console.log('New function before: ');

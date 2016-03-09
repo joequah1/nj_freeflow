@@ -22,7 +22,7 @@
 .ff_layer_list_style {
     cursor: pointer;
     padding: 10px 5px 15px 5px;
-    display: block;
+    display: block !important;
 }
 .ff_layer_list_style.selected {
     background: lightblue;
