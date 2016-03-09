@@ -125,7 +125,7 @@ buttonMedia.prototype.events = function () {
     
     var _this = this; 
     
-    this.controller.addResizeEvent(function (e) {
+    this.controller.components['resize'].addResizeEvent(function (e) {
         $('#ff_button_btn_' + e.layer + '[tab=' + e.tab + ']').css('line-height', e.size.height + 'px');
     });
 }

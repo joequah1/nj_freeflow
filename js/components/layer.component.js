@@ -47,11 +47,12 @@ var layer = function (_this) {
                 $('#ff_layer_' + index + '[tab=' + tab + ']').addClass('selected');
 
                 /* resize */
-                _this.stopReize('.ff_layer[tab=' + tab + ']');
-                _this.resize('#ff_layer_' + index + '[tab=' + tab + ']');
+                //_this.stopReize('.ff_layer[tab=' + tab + ']');
+                //_this.resize('#ff_layer_' + index + '[tab=' + tab + ']');
 
+                _this.onNewLayer('#ff_layer_' + index + '[tab=' + tab + ']', tab);
                 /* set content property */
-                _this.changeLayer(tab, index);
+                _this.onLayerChange(tab, index);
             });
 
             /* select layer from list */
@@ -71,11 +72,13 @@ var layer = function (_this) {
                 $(this).addClass('selected');
 
                 /* resize */
-                _this.stopReize('.ff_layer[tab=' + tab + ']');
-                _this.resize('#ff_layer_' + index + '[tab=' + tab + ']');
-
+                //_this.stopReize('.ff_layer[tab=' + tab + ']');
+                //_this.resize('#ff_layer_' + index + '[tab=' + tab + ']');
+                
+                
+                _this.onNewLayer('#ff_layer_' + index + '[tab=' + tab + ']', tab);
                 /* set content property */
-                _this.changeLayer(tab, index);
+                _this.onLayerChange(tab, index);
             });
 
             /* delete layer */
@@ -109,7 +112,7 @@ var layer = function (_this) {
             layer.style.width = 100;
             layer.style.height = 50;
 
-            layer.innerHTML = '<div class="content"><img src="http://192.168.56.1:9090/img/' + index + '.png" width="100%" height="100%"/></div>';
+            layer.innerHTML = '<div class="content"><img src="' + _this.path + 'img/ff-component-layer.jpg" width="100%" height="100%"/></div>';
 
             /* remove selected div */
             $('.ff_layer[tab=' + _this.tab + ']').removeClass('selected');
@@ -117,10 +120,10 @@ var layer = function (_this) {
             /* add to content */
             _this.content.append(layer);
             /* init resize */
-            _this.stopReize('.ff_layer[tab=' + _this.tab + ']');
-            _this.resize(layer);
-            /* draggable */
-            _this.drag(layer);
+            //_this.stopReize('.ff_layer[tab=' + _this.tab + ']');
+            //_this.resize(layer);
+            
+            _this.onNewLayer(layer, _this.tab);
 
             /* add to list */
             var list = document.createElement('li');
@@ -196,7 +199,7 @@ var layer = function (_this) {
             }
 
             /* set content property after insert to json */
-            _this.changeLayer(_this.tab, index);
+            _this.onLayerChange(_this.tab, index);
         }
     };
     

@@ -1,4 +1,4 @@
-var myComponent = function (options) {
+var freeflowComponent = function (options) {
 
     /* initialize SDK */ 
     this.sdk = new madCreator ({
@@ -25,7 +25,7 @@ var myComponent = function (options) {
     var _this = this;
     this.components = {};
     
-    this.path = 'http://192.168.56.1:9090/';
+	this.path = options.path
 
     this.sdk.loadCss(this.path + 'css/style.css');
     this.sdk.loadCss(this.path + 'css/media.css');
@@ -58,6 +58,8 @@ var myComponent = function (options) {
             'property' : property,
             'animation' : animation,
             'action' : action,
+            'drag' : drag,
+            'resize' : resize
         };
         
         _this.register();
@@ -75,23 +77,30 @@ var myComponent = function (options) {
 
 }
 /* initializing components */
-myComponent.prototype.register = function () {
+freeflowComponent.prototype.register = function () {
     for ( var fn in this.components ) {   
         this.components[fn] = new this.components[fn](this);
         this.components[fn].initialize();
     }
 }
 /* on selected layer change, trigger change function in each component */
-myComponent.prototype.changeLayer = function (tab, index) {
+freeflowComponent.prototype.onLayerChange = function (tab, index) {
     for ( var fn in this.components ) {  
         if (typeof this.components[fn].change != 'undefined') {
             this.components[fn].change(tab, index);
         }
     }
 }
+freeflowComponent.prototype.onNewLayer = function (layer, tab) {
+    for ( var fn in this.components ) {  
+        if (typeof this.components[fn].new != 'undefined') {
+            this.components[fn].new(layer, tab);
+        }
+    }
+}
 
 
-myComponent.prototype.loadJs = function(files, callback) {
+freeflowComponent.prototype.loadJs = function(files, callback) {
     var _this = this;
     var script, r;
     r = false;
@@ -112,7 +121,7 @@ myComponent.prototype.loadJs = function(files, callback) {
     document.getElementsByTagName('head')[0].appendChild(script);
 }
 
-myComponent.prototype.addHttp = function (url) {
+freeflowComponent.prototype.addHttp = function (url) {
    if (!/^(f|ht)tps?:\/\//i.test(url)) {
       url = "http://" + url;
    }
@@ -121,7 +130,7 @@ myComponent.prototype.addHttp = function (url) {
 
 
 /* @TEST generate html */
-myComponent.prototype.generate = function () {
+freeflowComponent.prototype.generate = function () {
     
     var _this = this;
     
@@ -136,6 +145,8 @@ myComponent.prototype.generate = function () {
                 console.log('generate');
                 console.log(_this.content.html() );
                 console.log(JSON.stringify(_this.data));
+                _this.sdk.setPrefStructure (_this.data);
+                
             }
         }
     });
