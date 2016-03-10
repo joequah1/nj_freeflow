@@ -46,6 +46,8 @@ var resize = function (_this) {
         new : function (layer, tab) {
             var self = this;
             
+            $('.ff_layer[tab=' + tab + ']').resizable('destroy');
+            
             $(layer).resizable({
                 stop : function (event, ui) {
                     var tab = $(ui.element).attr('tab');
