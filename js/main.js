@@ -128,28 +128,45 @@ freeflowComponent.prototype.addHttp = function (url) {
    return url;
 }
 
-
-/* @TEST generate html */
+/* controller generate html */
 freeflowComponent.prototype.generate = function () {
     
     var _this = this;
     
-    var generate = this.sdk.getButton({
-        'title' : {'title' : '' },
-        'input' : { value : 'Generate', tab : this.tab, style : 'margin-top: 10px;' },
-        'event' : {
-            'type' : 'click',
-            'callback' : function () {
-                
-                var tab = $(this).attr('tab');
-                console.log('generate');
-                console.log(_this.content.html() );
-                console.log(JSON.stringify(_this.data));
-                _this.sdk.setPrefStructure (_this.data);
-                
-            }
+    /* get template */
+    $.get(this.path + 'template.html', function (txt) {
+        _this.template = txt;
+    });
+    
+    savedCallback.push(function (jsonObject) {
+        console.log(_this.tab);
+        console.log(_this.data);
+        console.log(jsonObject);
+        
+        /* @NOTE FreeFlow save - NJ */
+        if (preferences['tab-1'].component == 30) {
+
+            console.log(cdnAssetsDomain);
+
+            /* replace html dom */
+            _this.template = _this.template.replace('{{html}}', $('#tab1').html());
+            /* replace data */
+            _this.template = _this.template.replace('{{data}}', JSON.stringify(_this.data));
+
+            $.ajax({
+                url: 'api/generate-free-flow',  //Server script to process data
+                type: 'POST',
+                dataType : "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ userId : userId, md5 : jsonObject.result.MD5id, content : _this.template}),
+                success: function (jsonObject) {
+                    console.log(jsonObject);
+                }
+            });
         }
     });
     
-    this.container.append(generate);
+    document.getElementById('save-new').addEventListener('click', function () {
+        _this.sdk.setPrefStructure (_this.data);
+    })
 }
