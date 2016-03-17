@@ -9,6 +9,7 @@
                 },
                 'input' : {
                     'value' : -1,
+                    'class' : 'form-control ',
                     'options' : [
                         {'text' : '-- Select --', 'value' : -1},
                         {'text' : 'Image', 'value' : 0},

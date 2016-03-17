@@ -22,7 +22,7 @@
 .ff_layer_list_style {
     cursor: pointer;
     padding: 10px 5px 15px 5px;
-    display: block !important;
+    display: block;
 }
 .ff_layer_list_style.selected {
     background: lightblue;
@@ -39,5 +39,5 @@
 
 #ff_media_content .innerTinyDivision {
     padding-left: 0;
+    padding-bottom: 10px;
 }
-
