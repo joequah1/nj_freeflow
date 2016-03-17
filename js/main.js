@@ -25,11 +25,14 @@ var freeflowComponent = function (options) {
     var _this = this;
     this.components = {};
     
-	this.path = options.path
+    this.fonts = [{'text' : 'Arial', 'value' : 'Arial'},{'text' : 'Arial Black', 'value' : 'Arial Black'},{'text' : 'Book Antiqua', 'value' : 'Book Antiqua'},{'text' : 'Comic Sans MS', 'value' : 'Comic Sans MS'},{'text' : 'Courier New', 'value' : 'Courier New'},{'text' : 'Georgia', 'value' : 'Georgia'},{'text' : 'Helvetica', 'value' : 'Helvetica'},{'text' : 'Lucida Console', 'value' : 'Lucida Console'},{'text' : 'Lucida Grande', 'value' : 'Lucida Grande'},{'text' : 'Lucida Sans Unicode', 'value' : 'Lucida Sans Unicode'},{'text' : 'Palatino Linotype', 'value' : 'Palatino Linotype'},{'text' : 'Tahoma', 'value' : 'Tahoma'},{'text' : 'Times New Roman', 'value' : 'Times New Roman'},{'text' : 'Trebuchet MS', 'value' : 'Trebuchet MS'},{'text' : 'Verdana', 'value' : 'Verdana'}];
+
+    this.path = options.path
 
     this.sdk.loadCss(this.path + 'css/style.css');
     this.sdk.loadCss(this.path + 'css/media.css');
     this.sdk.loadCss(this.path + 'css/nj-pure-tab.css');
+    this.sdk.loadCss(this.path + 'js/plugins/colorpicker/css/bootstrap-colorpicker.min.css');
     
     var js = [
         'js/components/layer.component.js',
@@ -43,7 +46,8 @@ var freeflowComponent = function (options) {
         'js/media/button.media.js',
         'js/media/text.media.js',
         'js/media/shape.media.js',
-        'js/plugins/velocity.js'];
+        'js/plugins/velocity.js',
+        'js/plugins/colorpicker/js/bootstrap-colorpicker.js'];
     
     /* load all js before initializing */
     this.loadJs(js, function () {
